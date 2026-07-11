@@ -91,7 +91,29 @@
             transform: scale(1.05);
             box-shadow: 0 15px 25px rgba(0,0,0,0.2);
         }
+        .password-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
 
+        #gift-password {
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border: 2px solid var(--white);
+            border-radius: 25px;
+            outline: none;
+            text-align: center;
+            margin-bottom: 20px;
+            display: block;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+        }
+        
         /* --- Main Layout --- */
         .content-wrapper {
             position: relative;
@@ -280,7 +302,12 @@
 
     <!-- Curtain -->
     <div id="curtain">
-        <button class="open-btn" onclick="openGift()">Open Gift 🎁</button>
+        <div class="password-container">
+            <h2 style="color: white; border: none; margin-bottom: 15px;">Secret Password</h2>
+            <input type="password" id="gift-password" placeholder="Enter password..." />
+            <button class="open-btn" onclick="checkPassword()" style="font-size: 1.2rem; padding: 10px 30px;">Unlock</button>
+            <p id="error-msg" style="color: #ffe4eb; margin-top: 15px; font-weight: bold; display: none;">Incorrect password, try again!</p>
+        </div>
     </div>
 
     <!-- Floating Hearts Container -->
@@ -352,6 +379,21 @@
 
     <script>
         // --- 1. Curtain & Audio Logic ---
+        // --- 1. Curtain & Audio Logic ---
+        
+        function checkPassword() {
+            // Gets the typed password, makes it lowercase, and removes extra spaces
+            const pwd = document.getElementById('gift-password').value.toLowerCase().trim();
+            const errorMsg = document.getElementById('error-msg');
+
+            if (pwd === "love") {
+                errorMsg.style.display = 'none'; // Hide error
+                openGift(); // Run the curtain opening animation
+            } else {
+                errorMsg.style.display = 'block'; // Show error
+            }
+        }
+
         function openGift() {
             const curtain = document.getElementById('curtain');
             const mainContent = document.getElementById('main-content');
