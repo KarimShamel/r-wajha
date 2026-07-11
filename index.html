@@ -461,6 +461,7 @@
         });
 
         // --- 5. Populate 10 Video Cards with Custom Captions ---
+      // --- 5. Populate 10 Video Cards with Custom Captions ---
         const videoCaptions = [
             "Your laugh is my favorite sound in the world.",
             "Caught on camera: the sweetest guy ever.",
@@ -479,14 +480,12 @@
             const i = index + 1;
             videoGrid.innerHTML += `
                 <div class="media-card">
-                    <!-- Replace the img tag below with this video tag when ready: -->
-                    <!-- <video src="video${i}.mp4" controls class="media-placeholder"></video> -->
-                    <img src="https://via.placeholder.com/400x300/d81b60/ffffff?text=Video+${i}" alt="Video ${i}" class="media-placeholder">
+                    <video src="video${i}.mp4" controls class="media-placeholder" style="width: 100%; object-fit: cover;"></video>
                     <div class="caption">${caption}</div>
                 </div>
             `;
         });
-
+        
         // --- 6. Populate 28 Reasons ---
         const reasons = [
             "you make me feel safe",
