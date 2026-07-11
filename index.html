@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Mohamed!</title>
+    <!-- Google Fonts for English and Arabic typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ff9cbd;
+            --light-pink: #fff0f5;
+            --dark-pink: #d81b60;
+            --text-dark: #4a4a4a;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-pink);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Floating Hearts Animation --- */
+        .heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -10vh;
+            font-size: 24px;
+            animation: floatUp linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(-110vh) scale(1.5) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- Curtain Effect --- */
+        #curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        #curtain.open {
+            transform: translateY(-100%);
+        }
+
+        .open-btn {
+            background-color: var(--white);
+            color: var(--dark-pink);
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .open-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+        }
+
+        /* --- Main Layout --- */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-pink);
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(216, 27, 96, 0.1);
+        }
+
+        /* --- Countdown Timer --- */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .time-box {
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(255, 156, 189, 0.3);
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-pink);
+        }
+
+        .time-box p {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-pink);
+            margin-top: 5px;
+        }
+
+        /* --- Section Titles --- */
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-pink);
+            font-size: 2.5rem;
+            margin: 60px 0 30px;
+            text-align: center;
+            width: 100%;
+            border-bottom: 2px solid var(--primary-pink);
+            padding-bottom: 10px;
+        }
+
+        /* --- Grids (Photos & Videos) --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        .media-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .media-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 156, 189, 0.4);
+        }
+
+        .media-placeholder {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+            display: block;
+        }
+
+        .caption {
+            padding: 15px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            font-style: italic;
+        }
+
+        /* --- 28 Reasons Grid --- */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .reason-card {
+            background: linear-gradient(145deg, #ffffff, #ffe4eb);
+            padding: 25px 20px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 156, 189, 0.2);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #fff0f5;
+        }
+
+        .reason-card:hover {
+            transform: scale(1.03);
+            background: linear-gradient(145deg, #ffe4eb, #ffffff);
+        }
+
+        .reason-number {
+            color: var(--primary-pink);
+            font-size: 1.5rem;
+            margin-right: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* --- Love Letter --- */
+        .love-letter-section {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 20px;
+            margin-top: 80px;
+            box-shadow: 0 15px 35px rgba(255, 156, 189, 0.3);
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+        }
+
+        .love-letter-section::before {
+            content: '❤️';
+            font-size: 40px;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.6rem;
+            line-height: 2.2;
+            text-align: center;
+            color: var(--text-dark);
+            direction: rtl;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .countdown { flex-wrap: wrap; }
+            .time-box { min-width: 80px; }
+            .time-box span { font-size: 1.8rem; }
+            .arabic-text { font-size: 1.3rem; }
+            .love-letter-section { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" src="r.mp3" loop></audio>
+
+    <!-- Curtain -->
+    <div id="curtain">
+        <button class="open-btn" onclick="openGift()">Open Gift 🎁</button>
+    </div>
+
+    <!-- Floating Hearts Container -->
+    <div class="heart-container" id="heart-container"></div>
+
+    <!-- Main Content -->
+    <div class="content-wrapper" id="main-content">
+        
+        <header>
+            <h1>Happy Birthday Mohamed!</h1>
+            <p>Counting down to your special day ❤️</p>
+            
+            <div class="countdown">
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <p>Days</p>
+                </div>
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <p>Hours</p>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <p>Minutes</p>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <p>Seconds</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Memories (Photos) -->
+        <h2>Our Beautiful Memories</h2>
+        <div class="grid-container" id="photo-grid">
+            <!-- JS will inject 30 photo cards here -->
+        </div>
+
+        <!-- Video Moments -->
+        <h2>Moments in Motion</h2>
+        <div class="grid-container" id="video-grid">
+            <!-- JS will inject 10 video cards here -->
+        </div>
+
+        <!-- 28 Things I Love About You -->
+        <h2>28 Things I Love About You</h2>
+        <div class="reasons-grid" id="reasons-grid">
+            <!-- JS will inject 28 reasons here -->
+        </div>
+
+        <!-- Love Letter -->
+        <div class="love-letter-section">
+            <div class="arabic-text">
+                <p>الي حمود رفيق عمري وحبيبي والمربيني من وانا قد كدهو كل سنه وانت طيب ي حمود كل سنه وانت بخير ودايما مبسوط وتبطل لؤم ومكر بتمنالك الجي كله يكون خير وسعاده وتكون مرتاح اكتر في شغلك وحياتك ونفسيتك بتمنالك كل الحلو الفّي الدنيا كل سنه وانت اجمل وأحسن راجل في حياتي كلها وحياتي ابتدت بيك وباذن الله تنتهي معاك ي محمد</p>
+                <br>
+                <p>انت عارف انا بحبك قد اي ومرينا بأي سوا وانا فخوره أننا احنا عدينا بده كله سوا ولو زعلتك في مره فهو غصب متزعلش</p>
+                <p>وباذن الله العيد ميلاد الجي نكون سوا خلاص وكل حاجه بقت احلي وأجمل</p>
+                <br>
+                <p>حطيتلك الاغنيه دي علشان فعلا النوم بيحرم عليك واحنا متخانقين ❤️😂</p>
+                <br>
+                <p>كل سنه وانت طيب ي حمود ي روحي</p>
+                <p>بحبك</p>
+                <p>من حببتك وشريكتك</p>
+                <p><strong>رنومتك 💗</strong></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- 1. Curtain & Audio Logic ---
+        function openGift() {
+            const curtain = document.getElementById('curtain');
+            const mainContent = document.getElementById('main-content');
+            const music = document.getElementById('bg-music');
+            
+            // Try playing audio
+            music.play().catch(error => console.log("Audio play failed:", error));
+            
+            // Open curtain
+            curtain.classList.add('open');
+            mainContent.style.display = 'flex';
+            
+            // Remove curtain from DOM after animation
+            setTimeout(() => {
+                curtain.style.display = 'none';
+            }, 1500);
+        }
+
+        // --- 2. Floating Hearts Generator ---
+        function createHearts() {
+            const container = document.getElementById('heart-container');
+            const emojis = ['💖', '💗', '💕', '💓', '💘'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                // Randomize position, size, and duration
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                
+                container.appendChild(heart);
+                
+                // Remove heart after it floats up
+                setTimeout(() => {
+                    heart.remove();
+                }, 9000);
+            }, 300);
+        }
+        createHearts();
+
+        // --- 3. Countdown Timer ---
+        // Date format assumes July 12, 2026. Adjust to 'December 07, 2026' if needed.
+        const birthday = new Date("July 12, 2026 00:00:00").getTime();
+
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = birthday - now;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.querySelector('.countdown').innerHTML = "<h2 style='border:none; margin:0;'>It's Your Birthday! 🎉</h2>";
+                return;
+            }
+
+            document.getElementById("days").innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            document.getElementById("hours").innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+        }, 1000);
+
+        // --- 4. Populate 30 Photo Cards ---
+        const photoGrid = document.getElementById('photo-grid');
+        for (let i = 1; i <= 30; i++) {
+            photoGrid.innerHTML += `
+                <div class="media-card">
+                    <img src="photo${i}.jpg" alt="Memory ${i}" class="media-placeholder" onerror="this.src='https://via.placeholder.com/400x300/ff9cbd/ffffff?text=Photo+${i}'">
+                    <div class="caption">Memory ${i}: Add your caption here 💖</div>
+                </div>
+            `;
+        }
+
+        // --- 5. Populate 10 Video Cards ---
+        const videoGrid = document.getElementById('video-grid');
+        for (let i = 1; i <= 10; i++) {
+            videoGrid.innerHTML += `
+                <div class="media-card">
+                    <!-- Replace with <video src="video${i}.mp4" controls class="media-placeholder"></video> -->
+                    <img src="https://via.placeholder.com/400x300/d81b60/ffffff?text=Video+${i}" alt="Video ${i}" class="media-placeholder">
+                    <div class="caption">Video ${i}: Add your caption here 🎥</div>
+                </div>
+            `;
+        }
+
+        // --- 6. Populate 28 Reasons ---
+        const reasons = [
+            "you make me feel safe",
+            "you listen to me",
+            "you are loyal",
+            "you treat me like a princess",
+            "you treat your family beautifuly",
+            "you are so sweet to all animals",
+            "you are kind",
+            "your heart is made of gold",
+            "you never gossip or talk bad about people",
+            "you are so amazing but super down to earth",
+            "you make me laugh",
+            "you love cinema just like me",
+            "you never judge me",
+            "i can be myself around you",
+            "you are always there for everyone",
+            "you are so generous",
+            "your soul is so pure like kids",
+            "you can cook (so i don't have to €)",
+            "you are handsome (i am a bit shallow okay?)",
+            "i learned manyyyy new things from you",
+            "you are patient and calm",
+            "you are wise",
+            "you're a hard worker",
+            "you love my family just like yours",
+            "you RESPECT me",
+            "you look like me hehe",
+            "i can talk to you for hours and hours and never get bored",
+            "you helped me when i had depression and never complained"
+        ];
+
+        const reasonsGrid = document.getElementById('reasons-grid');
+        reasons.forEach((reason, index) => {
+            reasonsGrid.innerHTML += `
+                <div class="reason-card">
+                    <span class="reason-number">${index + 1}.</span>
+                    <span>${reason}</span>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
