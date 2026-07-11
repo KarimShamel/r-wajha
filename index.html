@@ -415,28 +415,77 @@
             document.getElementById("seconds").innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
         }, 1000);
 
-        // --- 4. Populate 30 Photo Cards ---
+       // --- 4. Populate 30 Photo Cards with Custom Captions ---
+        const photoCaptions = [
+            "The day my life got infinitely better ❤️",
+            "Your smile is my absolute favorite view.",
+            "Look at us! Just two kids in love.",
+            "You make ordinary moments feel extraordinary.",
+            "Safe in your arms, right where I belong.",
+            "My favorite adventure buddy forever.",
+            "I could get lost in your eyes for hours.",
+            "A picture-perfect moment with my perfect man.",
+            "The way you look at me makes my heart melt.",
+            "Just you, me, and a whole lot of love.",
+            "So incredibly proud to call you mine.",
+            "Our goofy moments are my absolute favorite.",
+            "You and me against the world.",
+            "Thank you for treating me like a princess 👑",
+            "My forever plus-one.",
+            "Every single day with you is a blessing.",
+            "The most handsome guy I know! (Not shallow, just honest)",
+            "Loving you is the easiest thing I've ever done.",
+            "You are my peace and my sunshine.",
+            "Building our beautiful future, one memory at a time.",
+            "I love doing nothing, as long as it's with you.",
+            "My rock, my best friend, my everything.",
+            "Even when we argue, I still want to be right next to you ❤️😂",
+            "You have my whole heart, today and always.",
+            "A memory I will cherish for a lifetime.",
+            "The absolute best thing that ever happened to me.",
+            "Looking forward to a million more moments like this.",
+            "You still give me butterflies every time.",
+            "Soulmates. Plain and simple.",
+            "I love you more than words could ever say."
+        ];
+
         const photoGrid = document.getElementById('photo-grid');
-        for (let i = 1; i <= 30; i++) {
+        photoCaptions.forEach((caption, index) => {
+            const i = index + 1;
             photoGrid.innerHTML += `
                 <div class="media-card">
                     <img src="photo${i}.jpg" alt="Memory ${i}" class="media-placeholder" onerror="this.src='https://via.placeholder.com/400x300/ff9cbd/ffffff?text=Photo+${i}'">
-                    <div class="caption">Memory ${i}: Add your caption here 💖</div>
+                    <div class="caption">${caption}</div>
                 </div>
             `;
-        }
+        });
 
-        // --- 5. Populate 10 Video Cards ---
+        // --- 5. Populate 10 Video Cards with Custom Captions ---
+        const videoCaptions = [
+            "Your laugh is my favorite sound in the world.",
+            "Caught on camera: the sweetest guy ever.",
+            "Just us being our silly, authentic selves.",
+            "I can't stop rewatching this one!",
+            "A little snippet of our perfect chaos.",
+            "Proof that there is never a dull moment with you.",
+            "My favorite movie star 🎬",
+            "You make my heart skip a beat every time.",
+            "A memory that always brings a massive smile to my face.",
+            "Forever my favorite co-star in this life."
+        ];
+
         const videoGrid = document.getElementById('video-grid');
-        for (let i = 1; i <= 10; i++) {
+        videoCaptions.forEach((caption, index) => {
+            const i = index + 1;
             videoGrid.innerHTML += `
                 <div class="media-card">
-                    <!-- Replace with <video src="video${i}.mp4" controls class="media-placeholder"></video> -->
+                    <!-- Replace the img tag below with this video tag when ready: -->
+                    <!-- <video src="video${i}.mp4" controls class="media-placeholder"></video> -->
                     <img src="https://via.placeholder.com/400x300/d81b60/ffffff?text=Video+${i}" alt="Video ${i}" class="media-placeholder">
-                    <div class="caption">Video ${i}: Add your caption here 🎥</div>
+                    <div class="caption">${caption}</div>
                 </div>
             `;
-        }
+        });
 
         // --- 6. Populate 28 Reasons ---
         const reasons = [
